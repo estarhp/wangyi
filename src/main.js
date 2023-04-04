@@ -1,6 +1,27 @@
 import Vue from 'vue'
 import App from './App.vue'
-import {Container, Aside, Header, Main, Footer, Link, Row, Col, Input, Avatar, Icon, Menu, MenuItem} from 'element-ui';
+import axios from 'axios'
+import {
+  Container,
+  Aside,
+  Header,
+  Main,
+  Footer,
+  Link,
+  Row,
+  Col,
+  Input,
+  Avatar,
+  Icon,
+  Menu,
+  MenuItem,
+  Button,
+  MessageBox, Dialog, Image, DropdownMenu, DropdownItem, Dropdown,
+} from 'element-ui';
+
+import store from './store';
+import './utils/dialog'
+
 
 Vue.config.productionTip = false
 
@@ -18,12 +39,21 @@ Vue.use(Avatar)
 Vue.use(Icon)
 Vue.use(Menu)
 Vue.use(MenuItem)
+Vue.use(Button)
+Vue.use(Dialog)
+Vue.use(Image)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Dropdown)
 
 
-
-
-
-
+Vue.prototype.$axios = axios
 new Vue({
   render: h => h(App),
+  store,
+  beforeCreate() {
+    Vue.prototype.$bus=this
+    Vue.prototype.$alert = MessageBox.alert
+  }
+
 }).$mount('#app')

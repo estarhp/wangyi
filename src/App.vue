@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <el-container>
+
+   <el-container>
       <el-header>
-       <Navigation></Navigation>
-      </el-header>
+      <Navigation></Navigation>
+     </el-header>
+     <el-container>
       <el-container>
-        <el-container>
-          <el-aside width="200px"><Myaside/></el-aside>
-          <el-main>Main</el-main>
+         <el-aside width="200px"><Myaside/></el-aside>
+          <el-main >     <Mymain></Mymain>
+          </el-main>
         </el-container>
-        <el-footer>Footer</el-footer>
+        <el-footer></el-footer>
       </el-container>
     </el-container>
+
+
+
   </div>
 </template>
 
 <script>
 
+
 import Navigation from "@/components/Navigation";
 import Myaside from "@/components/Myaside";
+import Mymain from "@/components/Mymain";
 
 export default {
   name: 'App',
-  components:{Navigation,Myaside}
+  components:{Navigation,Myaside,Mymain},
+  data(){
+    return{
+      code:""
+    }
+  },
+  methods:{
+
+  }
 }
 </script>
 

@@ -9,6 +9,8 @@
           class="el-menu-vertical-demo"
 
 
+
+
           >
         <el-menu-item index="1" >
           <span slot="title" >发现音乐</span>
@@ -51,7 +53,6 @@
           background-color="white"
           text-color="rgba(51,51,51)"
           class="el-menu-vertical-demo"
-
           >
 
 
@@ -60,7 +61,7 @@
       </el-menu></el-row>
     </el-col>
   </el-row>
-  <el-row class="gedan">创建的歌单</el-row>
+  <el-row class="gedan">创建的歌单<i class="el-icon-caret-right"></i></el-row>
 
 </div>
 </template>
@@ -69,9 +70,7 @@
 export default {
   name: "Myaside",
   methods:{
-
   }
-
 
 }
 </script>
@@ -90,9 +89,9 @@ export default {
   line-height: 35px;
 }
 
-
-
-
+.hhh {
+  font-weight: 1000;
+}
 
 .gedan {
   font-size: 12px;
