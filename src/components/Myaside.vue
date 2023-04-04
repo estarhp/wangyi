@@ -12,11 +12,13 @@
 
 
           >
-        <el-menu-item index="1" >
-          <span slot="title" >发现音乐</span>
-        </el-menu-item>
-        <el-menu-item index="2">
+        <router-link to="/MainPage" style="text-decoration: none">
+          <el-menu-item index="1" >
+            <span slot="title" >发现音乐</span>
+          </el-menu-item>
+        </router-link>
 
+        <el-menu-item index="2">
           <span slot="title">播客</span>
         </el-menu-item>
         <el-menu-item index="3">
@@ -67,10 +69,12 @@
 </template>
 
 <script>
+
 export default {
   name: "Myaside",
   methods:{
-  }
+  },
+
 
 }
 </script>

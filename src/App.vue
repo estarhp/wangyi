@@ -8,10 +8,11 @@
      <el-container>
       <el-container>
          <el-aside width="200px"><Myaside/></el-aside>
-          <el-main >     <Mymain></Mymain>
+          <el-main>
+            <router-view></router-view>
           </el-main>
         </el-container>
-        <el-footer></el-footer>
+        <el-footer style="height: 80px"></el-footer>
       </el-container>
     </el-container>
 
@@ -25,11 +26,11 @@
 
 import Navigation from "@/components/Navigation";
 import Myaside from "@/components/Myaside";
-import Mymain from "@/components/Mymain";
+import MainPage from "@/components/MainPage";
 
 export default {
   name: 'App',
-  components:{Navigation,Myaside,Mymain},
+  components:{Navigation,Myaside,MainPage},
   data(){
     return{
       code:""
@@ -46,7 +47,9 @@ export default {
   background-color: #B3C0D1;
   color: #333;
   line-height: 60px;
+
 }
+
 
 .el-aside {
   background-color: #fff;
@@ -61,6 +64,7 @@ export default {
   color: #333;
   text-align: center;
   line-height: 160px;
+  padding: 0;
 }
 
 #app > .el-container {
@@ -74,4 +78,5 @@ export default {
 .el-input__inner {
   background-color: #F56C6C;
 }
+
 </style>
