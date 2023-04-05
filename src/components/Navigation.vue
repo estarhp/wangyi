@@ -1,7 +1,7 @@
 <template>
 
     <el-row >
-      <el-col style="width: 170px">
+      <el-col  :span="5" style="width: 170px">
         <div id="logo" class="grid-content"></div>
       </el-col>
       <el-col :span="4" :offset="3">
@@ -30,9 +30,9 @@
                type="info"
                >
 
-        {{this.$store.state.userData.profile.nickname}}<i class="el-icon-caret-bottom"></i>
+        {{this.$store.state.userData.profile["nickname"]}}<i class="el-icon-caret-bottom"></i>
       </el-link>
-           <el-dropdown-menu slot="dropdown" style="width: 300px;overflow: hidden;margin-right: -100px;margin-top: 0px">
+           <el-dropdown-menu slot="dropdown" style="width: 300px;overflow: hidden;margin-right: -100px;margin-top: 0">
              <el-dropdown-item style="height: 120px"></el-dropdown-item>
              <el-dropdown-item icon="el-icon-headset">会员中心</el-dropdown-item>
              <el-dropdown-item icon="el-icon-medal">等级</el-dropdown-item>
@@ -51,14 +51,13 @@
              :visible.sync="centerDialogVisible"
              draggable="true"
              width="25%"
-             v-dialogDrag
              center
              :before-close="handleClose"
          >
 
 
             <div class="baga">
-              <img :src="this.$store.state.qrImg" >
+              <img :src="this.$store.state.qrImg">
               <h6 >使用网易云app扫码登录</h6>
               <el-link :underline="false" class="qita">选择其他登陆模式></el-link>
             </div>
@@ -96,9 +95,6 @@ export default {
               res => console.log(res)
       )
     },
-    login(){
-      this.$bus.$emit("login")
-    },
     open:async function() {
       await this.$store.dispatch("login");
       this.centerDialogVisible = true
@@ -117,8 +113,8 @@ export default {
         this.$store.state.isLogin=true
       }
 
-     if(this.$store.state.isLogin=true==true){
-        this.avater=this.$store.state.userData.profile.avatarUrl
+     if(this.$store.state.isLogin===true){
+        this.avater=this.$store.state.userData.profile["avatarUrl"]
         console.log(this.avater)
       }
       // await this.$store.dispatch("getUserDetail")
@@ -143,7 +139,6 @@ export default {
 </script>
 
 <style>
-
 
 
 
@@ -191,6 +186,7 @@ h6 {
 
 #logo {
   background: url("@/assets/topbar.png") no-repeat 0 -5px;
+  width: 190px
 
 
 
@@ -204,6 +200,7 @@ h6 {
   border-radius: 4px;
   height: 60px;
   background: red;
+  width: 30vh
 }
 
 

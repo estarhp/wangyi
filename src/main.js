@@ -16,7 +16,19 @@ import {
   Menu,
   MenuItem,
   Button,
-  MessageBox, Dialog, Image, DropdownMenu, DropdownItem, Dropdown, Tabs, TabPane, Carousel, CarouselItem,
+  MessageBox,
+  Dialog,
+  Image,
+  DropdownMenu,
+  DropdownItem,
+  Dropdown,
+  Tabs,
+  TabPane,
+  Carousel,
+  CarouselItem,
+  Card,
+  Badge,
+  RadioGroup, RadioButton,
 } from 'element-ui';
 
 import store from './store';
@@ -50,6 +62,10 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(Card)
+Vue.use(Badge)
+Vue.use(RadioGroup)
+Vue.use(RadioButton)
 
 
 

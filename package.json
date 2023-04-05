@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "element-ui": "^2.15.13",
     "js-cookie": "^3.0.1",
+    "less-loader": "^11.1.0",
     "sass": "^1.60.0",
     "sass-loader": "^13.2.2",
     "vue": "^2.6.14",

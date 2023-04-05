@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import axios from "axios";
+import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 Vue.use(Vuex);
 
@@ -72,6 +73,16 @@ const actions={
         context.state.userDetail=res.data
 
 
+    },
+
+    getNewPushs: async function(context,type){
+        const res=axios({
+            url:`/top/song?type=${type}`,
+            method:"get"
+        })
+        context.state.NewPushList[type]=res.data.result
+
+
     }
 
 }
@@ -81,7 +92,14 @@ const state={
   userData:"",
     qrImg:"",
     userDetail:"",
-    timer:""
+    timer:"",
+    NewPushList:{
+      0:"",
+        7:"",
+        96:"",
+        8:"",
+        16:""
+    }
 }
 const mutations={}
 

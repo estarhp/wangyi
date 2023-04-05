@@ -78,5 +78,7 @@ export default {
 .el-input__inner {
   background-color: #F56C6C;
 }
-
+* {
+  user-select: none;
+}
 </style>

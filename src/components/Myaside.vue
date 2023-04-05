@@ -33,7 +33,9 @@
         <el-menu-item index="6">
           <span slot="title">私人FM</span>
         </el-menu-item>
-        <el-row class="mymusic" type="flex" justify="center" align="middle"><h5>我的音乐</h5></el-row>
+        <el-menu-item style="background-color: white !important;color: rgb(153,153,153)">
+          <span slot="title">我的音乐</span>
+        </el-menu-item>
         <el-menu-item index="7">
           <span slot="title">我喜欢的音乐</span>
         </el-menu-item>
@@ -81,16 +83,17 @@ export default {
 
 
 <style scoped>
-
-
-.mymusic {
+span {
   height: 20px;
   line-height: 10px;
-  background-color: white;
+  margin: 0;
 }
 .el-menu-item{
   height: 35px;
   line-height: 35px;
+}
+.el-menu-item:hover {
+ background-color: rgb(246,246,247) !important;
 }
 
 .hhh {
@@ -102,6 +105,11 @@ export default {
   line-height: 20px;
   height: 20px;
   color: rgb(153,153,153);
+}
+.el-menu-item.is-active {
+  color: #333333;
+  font-weight: 1000;
+  background-color: rgb(246,246,247) !important;
 }
 
 </style>

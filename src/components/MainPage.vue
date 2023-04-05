@@ -6,16 +6,17 @@
       <el-tab-pane label="歌单" name="third"></el-tab-pane>
       <el-tab-pane label="排行榜" name="fourth"></el-tab-pane>
       <el-tab-pane label="歌手" name="five"></el-tab-pane>
-      <el-tab-pane label="最新音乐" name="sixth"></el-tab-pane>
+      <el-tab-pane label="最新音乐" name="sixth"><NewMusic></NewMusic></el-tab-pane>
     </el-tabs>
 </div>
 </template>
 
 <script>
+import NewMusic from "@/components/NewMusic";
 import Customize from "@/components/Customize";
 export default {
   name: "MainPage",
-  components: {Customize},
+  components: {Customize,NewMusic},
   data(){
     return {
       activeName: 'second'
@@ -33,10 +34,17 @@ export default {
 </script>
 
 <style>
+
+
+.el-tabs__nav-wrap::after {
+  height: 0;
+}
 .el-tabs__nav {
-  height: 70px;
+  height: 50px;
 
 }
+
+
 .el-tabs__item:hover {
   color: #333333;
 }
@@ -47,6 +55,8 @@ export default {
 }
 .el-tabs__active-bar {
   background-color: red;
+  height: 3px;
+  border-radius: 1.5px;
 }
 
 .el-tab-pane {
