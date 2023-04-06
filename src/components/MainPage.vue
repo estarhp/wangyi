@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick" >
       <el-tab-pane label="个性推荐" name="second"><Customize></Customize></el-tab-pane>
       <el-tab-pane label="专属定制" name="first"></el-tab-pane>
-      <el-tab-pane label="歌单" name="third"></el-tab-pane>
+      <el-tab-pane label="歌单" name="third"><PlayList></PlayList></el-tab-pane>
       <el-tab-pane label="排行榜" name="fourth"></el-tab-pane>
       <el-tab-pane label="歌手" name="five"></el-tab-pane>
       <el-tab-pane label="最新音乐" name="sixth"><NewMusic></NewMusic></el-tab-pane>

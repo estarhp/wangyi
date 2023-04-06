@@ -6,8 +6,8 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
-const actions={
-    getLoginStatus:async function getLoginStatus(context,cookie = '') {
+const actions= {
+    getLoginStatus: async function getLoginStatus(context, cookie = '') {
         const res = await axios({
             url: `/login/status?timestamp=${Date.now()}`,
             method: 'post',
@@ -17,7 +17,7 @@ const actions={
         })
         return res
     },
-    checkStatus:async function checkStatus(context,key) {
+    checkStatus: async function checkStatus(context, key) {
         const res = await axios({
             url: `/login/qr/check?key=${key}&timestamp=${Date.now()}`,
         })
@@ -27,12 +27,10 @@ const actions={
     login: async function login(context) {
 
 
-
-
         let timer
         let timestamp = Date.now()
         const cookie = localStorage.getItem('cookie')
-        context.state.userData=(await context.dispatch("getLoginStatus",cookie)).data
+        context.state.userData = (await context.dispatch("getLoginStatus", cookie)).data
         console.log(context.state.userData)
         const res = await axios({
             url: `/login/qr/key?timestamp=${Date.now()}`,
@@ -41,12 +39,12 @@ const actions={
         const res2 = await axios({
             url: `/login/qr/create?key=${key}&qrimg=true&timestamp=${Date.now()}`,
         })
-        context.state.qrImg=res2.data.data.qrimg
+        context.state.qrImg = res2.data.data.qrimg
 
 
         timer = setInterval(async () => {
 
-            const statusRes = await context.dispatch("checkStatus",key)
+            const statusRes = await context.dispatch("checkStatus", key)
 
             if (statusRes.code === 800) {
                 alert('二维码已过期,请重新获取')
@@ -56,11 +54,11 @@ const actions={
                 // 这一步会返回cookie
                 clearInterval(timer)
                 alert('授权登录成功')
-                await context.dispatch("getLoginStatus",statusRes.cookie)
+                await context.dispatch("getLoginStatus", statusRes.cookie)
                 localStorage.setItem('cookie', statusRes.cookie)
             }
         }, 3000)
-        context.state.timer=timer
+        context.state.timer = timer
     },
 
     getUserDetail: async function getUserDetail(context) {
@@ -70,20 +68,20 @@ const actions={
             method: 'get',
         })
         console.log(res.data)
-        context.state.userDetail=res.data
+        context.state.userDetail = res.data
 
 
     },
 
-    getNewPush: async function(context, type){
-        const res=await axios({
-            url:`/top/song?type=${type}`,
-            method:"get"
+    getNewPush: async function (context, type) {
+        const res = await axios({
+            url: `/top/song?type=${type}`,
+            method: "get"
         })
 
-        context.state.NewPushList[type]=res.data.data
+        context.state.NewPushList[type] = res.data.data
     },
-    sliceArr:function(context,arr){
+    sliceArr: function (context, arr) {
         let size = 5; // 指定子数组长度
         let result = [];
         for (let i = 0; i < arr.length; i += size) {
@@ -92,22 +90,39 @@ const actions={
         }
         return result
     },
-    getNewUp: async function(context, type){
-        const res=await axios({
-            url:`/top/album?area=${type}`,
-            method:"get"
+    getNewUp: async function (context, type) {
+        const res = await axios({
+            url: `/top/album?area=${type}`,
+            method: "get"
         })
-       try {
-           context.state.NewUpList[type]["month"] = await context.dispatch("sliceArr",await res.data["monthData"])
-           context.state.NewUpList[type]["week"] = await context.dispatch("sliceArr",await res.data["weekData"])
-       }catch (err){
-           console.log(err)
-       }
+        try {
+            context.state.NewUpList[type]["month"] = await context.dispatch("sliceArr", await res.data["monthData"])
+            context.state.NewUpList[type]["week"] = await context.dispatch("sliceArr", await res.data["weekData"])
+        } catch (err) {
+            console.log(err)
+        }
 
 
-    }
+    },
+    getHighQualityList: async function (context, cat) {
+        const res = await axios({
+            url: `/top/playlist/highquality?cat=${cat}`,
+            method: "get"
+        })
+        Vue.set(context.state.highPlayList,cat,res.data.playlists)
+    },
+    getPlaylistTag: async function (context) {
+        const res = await axios({
+            url: `/playlist/highquality/tags`,
+            method: "get"
+        })
+        context.state.tags=res.data.tags
+        console.log(context.state.tags)
+    },
 
 }
+
+
 
 const state={
   isLogin:false,
@@ -115,6 +130,7 @@ const state={
     qrImg:"",
     userDetail:"",
     timer:"",
+    tags:'',
     NewPushList:{
       0:"",
         7:"",
@@ -128,6 +144,9 @@ const state={
         EA:{week:'',month:''},
         KR:{week:'',month:''},
         JP:{week:'',month:''}
+    },
+    highPlayList:{
+
     }
 }
 const mutations={}
