@@ -14,9 +14,10 @@
 <script>
 import NewMusic from "@/components/NewMusic";
 import Customize from "@/components/Customize";
+import PlayList from "@/components/PlayList";
 export default {
   name: "MainPage",
-  components: {Customize,NewMusic},
+  components: {Customize,NewMusic,PlayList},
   data(){
     return {
       activeName: 'second'

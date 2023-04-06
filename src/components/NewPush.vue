@@ -1,5 +1,6 @@
 <template>
   <div class="new-push" >
+
     <el-tabs v-model="activeName"  @tab-click="handleClick">
     <el-tab-pane label="全部" name="0" ><NewMusicItem :number="0" v-if="this.$store.state.NewPushList[0]"></NewMusicItem></el-tab-pane>
     <el-tab-pane label="华语" name="7" ><NewMusicItem :number="7" v-if="this.$store.state.NewPushList[7]"></NewMusicItem></el-tab-pane>

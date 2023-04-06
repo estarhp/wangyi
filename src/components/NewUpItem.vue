@@ -1,6 +1,6 @@
 <template>
-<!--  <div class="infinite-list" style="overflow:auto" scroll-container  ref="scroll">-->
-  <div class="new-up-item">
+  <div>
+  <div class="new-up-item" v-if="dataWeek && select=='less'" >
     <el-row :gutter="25"
             type="flex"
             justify="center"
@@ -10,14 +10,24 @@
       <el-col v-for="j in i" :span="4"  :key="i.id"><PlayAlum :src="j.picUrl" :details="j.name" :id="j.id"  ></PlayAlum></el-col>
     </el-row>
   </div>
-<!--</div>-->
+    <div class="new-up-item-month" v-if="dataMonth&&select=='more'||area!='ALL'" >
+      <el-row :gutter="25"
+              type="flex"
+              justify="center"
+              style="margin: 0"
+              v-for="(i,index) in this.dataMonth"
+      >
+        <el-col v-for="j in i" :span="4"  :key="i.id"><PlayAlum :src="j.picUrl" :details="j.name" :id="j.id"  ></PlayAlum></el-col>
+      </el-row>
+    </div>
+</div>
 </template>
 
 <script>
 import PlayAlum from "@/components/PlayAlum";
 export default {
   name: "NewUpItem",
-  props:["area"],
+  props:["area",'select'],
   components:{PlayAlum},
   data(){
     return {
@@ -41,6 +51,20 @@ export default {
 
 .new-up-item::before {
   content: "本周最新";
+  font-size: 20px;
+  color: #333333;
+  font-weight: 1000;
+  width: 40px;
+  height: 80px;
+  position: fixed;
+
+  line-height: 25px;
+  z-index: 20;
+  margin-left: -50%;
+  transform: translate(50%,0px);
+}
+.new-up-item-month::before {
+  content: "本月最新";
   font-size: 20px;
   color: #333333;
   font-weight: 1000;

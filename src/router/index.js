@@ -16,6 +16,10 @@ export default new VueRouter({
                 path:"NewUp",
                 component:NewUp
             },
+            {
+                path:"",
+                component:NewUp
+            }
         ]
     },
     ]

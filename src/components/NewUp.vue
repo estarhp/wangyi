@@ -1,12 +1,25 @@
 <template>
   <div class="new-up">
+    <div
+        style="display: flex;
+        align-items: center;
+        position: absolute;
+        transform: translate(875px,-15px);
+        z-index: 10"
+    ref="select"
+        v-if="activeName=='ALL'">
+      <div :class="'button-up '+ whatClass('less')"  id="less" @click="handlePick" >推荐</div>
+      <span style="font-size: 15px;color: #475669;margin: 0 5px;">|</span>
+      <div :class="'button-up '+ whatClass('more')"  id="more" @click="handlePick">全部</div>
+    </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="全部" name="ALL" ><NewUpItem area="ALL" v-if="this.$store.state.NewUpList['ALL']['month']"></NewUpItem></el-tab-pane>
-      <el-tab-pane label="华语" name="ZH" ><NewUpItem area="ZH" v-if="this.$store.state.NewUpList['ZH']['month']"></NewUpItem></el-tab-pane>
-      <el-tab-pane label="欧美" name="EA" ><NewUpItem area="EA" v-if="this.$store.state.NewUpList['EA']['month']"></NewUpItem></el-tab-pane>
-      <el-tab-pane label="韩国" name="KR" ><NewUpItem area="KR" v-if="this.$store.state.NewUpList['KR']['month']"></NewUpItem></el-tab-pane>
-      <el-tab-pane label="小日本" name="JP" ><NewUpItem area="JP" v-if="this.$store.state.NewUpList['JP']['month']"></NewUpItem></el-tab-pane>
+      <el-tab-pane label="全部" name="ALL" ><NewUpItem area="ALL" :select="isactive" v-if="this.$store.state.NewUpList['ALL']['month']" ></NewUpItem></el-tab-pane>
+      <el-tab-pane label="华语" name="ZH" ><NewUpItem area="ZH" :select="isactive" v-if="this.$store.state.NewUpList['ZH']['month']"></NewUpItem></el-tab-pane>
+      <el-tab-pane label="欧美" name="EA" ><NewUpItem area="EA" :select="isactive" v-if="this.$store.state.NewUpList['EA']['month']"></NewUpItem></el-tab-pane>
+      <el-tab-pane label="韩国" name="KR" ><NewUpItem area="KR" :select="isactive" v-if="this.$store.state.NewUpList['KR']['month']"></NewUpItem></el-tab-pane>
+      <el-tab-pane label="小日本" name="JP" ><NewUpItem area="JP" :select="isactive" v-if="this.$store.state.NewUpList['JP']['month']"></NewUpItem></el-tab-pane>
     </el-tabs>
+
   </div>
 </template>
 
@@ -18,16 +31,22 @@ export default {
 
   data(){
     return {
-      activeName:"ALL"
+      activeName:"ALL",
+      isactive:"less"
     }
   },methods:{
     handleClick(tab, event) {
-      console.log(12)
       const area=event.target.id.replace("tab-","")
       if(!this.$store.state.NewUpList[area]["month"]){
         this.$store.dispatch("getNewUp",area)
       }
-          }
+          },
+    handlePick(event){
+      this.isactive=event.target.id
+    },
+    whatClass(id){
+      return this.isactive==id ? "selected":""
+    }
   },
   mounted() {
     this.$store.dispatch("getNewUp","ALL")
@@ -37,8 +56,28 @@ export default {
 
 <style>
 
+.selected {
+  background-color: #FEF5F5;
+  color: red;
+}
 
 
+.el-tabs__nav-scroll {
+  width: 50%;
+}
+
+.el-tabs__nav-wrap .is-top {
+
+}
+
+.button-up {
+  height: 20px;
+  width: 40px;
+
+  border-radius: 10px;
+  font-size: 10px;
+  line-height: 20px;
+}
 
 .new-up .el-tabs__item {
   font-size: 7px;
