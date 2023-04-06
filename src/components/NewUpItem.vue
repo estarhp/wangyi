@@ -1,14 +1,16 @@
 <template>
-  <div class="infinite-list" style="overflow:auto" scroll-container  ref="scroll">
-  <el-row :gutter="25"
-          type="flex"
-          justify="center"
-          style="margin: 0"
-          v-for="(i,index) in this.dataWeek"
-  >
-    <el-col v-for="j in i" :span="4"  :key="i.id"><PlayAlum :src="j.picUrl" :details="j.name" :id="j.id"  ></PlayAlum></el-col>
-  </el-row>
-</div>
+<!--  <div class="infinite-list" style="overflow:auto" scroll-container  ref="scroll">-->
+  <div class="new-up-item">
+    <el-row :gutter="25"
+            type="flex"
+            justify="center"
+            style="margin: 0"
+            v-for="(i,index) in this.dataWeek"
+    >
+      <el-col v-for="j in i" :span="4"  :key="i.id"><PlayAlum :src="j.picUrl" :details="j.name" :id="j.id"  ></PlayAlum></el-col>
+    </el-row>
+  </div>
+<!--</div>-->
 </template>
 
 <script>
@@ -33,8 +35,11 @@ export default {
 }
 </script>
 
+
+
 <style scoped>
-.infinite-list::before {
+
+.new-up-item::before {
   content: "本周最新";
   font-size: 20px;
   color: #333333;
@@ -42,12 +47,11 @@ export default {
   width: 40px;
   height: 80px;
   position: fixed;
+
   line-height: 25px;
-  z-index: 1;
-
+  z-index: 20;
   margin-left: -50%;
-  transform: translateX(25%);
-
+  transform: translate(50%,0px);
 }
 
 .infinite-list {

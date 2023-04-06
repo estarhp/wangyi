@@ -1,6 +1,6 @@
 <template>
 
-    <div class="infinite-list" style="overflow:auto" scroll-container @click.stop="handleClick" ref="scroll">
+    <div  @click.stop="handleClick" >
       <el-row  v-for="(i,index) in data" type="flex" align="middle" justify="center" class="New-el-row">
         <el-col :span="2" >
           <div class="grid-content bg-purple">

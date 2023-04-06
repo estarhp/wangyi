@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-radio-group  style="margin-bottom: 20px;">
+  <div class="infinite-list"  style="overflow:scroll" scroll-container  ref="scroll">
+    <el-radio-group  style="margin-bottom: 20px;text-align: center ">
       <router-link  tag="button"  to="/MainPage/NewPush" class="router-link" active-class="isactive">新歌速递</router-link>
       <router-link tag="button" to="/MainPage/NewUp"  class="router-link" active-class="isactive" >新碟上架</router-link>
     </el-radio-group>
@@ -23,6 +23,16 @@ export default {
 </script>
 
 <style>
+
+
+
+
+
+.infinite-list {
+  height: 65vh;
+  position: relative;
+}
+
 .isactive {
   background-color: rgb(187,187,187) !important;
 }
