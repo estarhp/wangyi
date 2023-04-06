@@ -28,8 +28,9 @@ import {
   CarouselItem,
   Card,
   Badge,
-  RadioGroup, RadioButton,
+  RadioGroup, RadioButton, Loading,InfiniteScroll
 } from 'element-ui';
+
 
 import store from './store';
 import './utils/dialog'
@@ -66,6 +67,10 @@ Vue.use(Card)
 Vue.use(Badge)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
+Vue.use(Loading.directive)
+Vue.use(InfiniteScroll)
+
+
 
 
 
@@ -76,6 +81,7 @@ new Vue({
   store,
   router:router,
   beforeCreate() {
+    Vue.prototype.$loading = Loading.service
     Vue.prototype.$bus=this
     Vue.prototype.$alert = MessageBox.alert
   }

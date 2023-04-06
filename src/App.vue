@@ -81,4 +81,12 @@ export default {
 * {
   user-select: none;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-track {
+  display: none;
+}
 </style>

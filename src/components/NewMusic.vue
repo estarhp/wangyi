@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-radio-group v-model="isOne" style="margin-bottom: 20px;">
-      <router-link tag="button"  to="/MainPage/NewPush" class="router-link" active-class="isactive">新歌速递</router-link>
+    <el-radio-group  style="margin-bottom: 20px;">
+      <router-link  tag="button"  to="/MainPage/NewPush" class="router-link" active-class="isactive">新歌速递</router-link>
       <router-link tag="button" to="/MainPage/NewUp"  class="router-link" active-class="isactive" >新碟上架</router-link>
     </el-radio-group>
     <router-view></router-view>
@@ -13,9 +13,11 @@ export default {
   name: "NewMusic",
   data() {
     return {
-      isOne:true
     }
   },
+  mounted() {
+
+  }
 
 }
 </script>

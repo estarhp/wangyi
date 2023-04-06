@@ -1,9 +1,9 @@
 <template>
-  <el-badge :value="playCounts"  class="item"  icon="el-icon-search" >
+  <el-badge :value="playCounts"  class="item"  icon="el-icon-search"  v-if="playCount">
   <el-card :body-style="{ padding: '0px' }" shadow="never">
     <a :href='"https://music.163.com/playlist?id="+id'>
 
-      <el-image :src="src" class="image" :title="details" :lazy="true"  ></el-image>
+      <el-image :src="src+'?param=200y200'" class="image" :title="details" :lazy="true"  ></el-image>
 
       <div class="bottom">
         <div class="bottom clearfix">

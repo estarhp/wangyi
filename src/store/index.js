@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import axios from "axios";
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
+
 
 Vue.use(Vuex);
 
@@ -75,12 +75,34 @@ const actions={
 
     },
 
-    getNewPushs: async function(context,type){
-        const res=axios({
+    getNewPush: async function(context, type){
+        const res=await axios({
             url:`/top/song?type=${type}`,
             method:"get"
         })
-        context.state.NewPushList[type]=res.data.result
+
+        context.state.NewPushList[type]=res.data.data
+    },
+    sliceArr:function(context,arr){
+        let size = 5; // 指定子数组长度
+        let result = [];
+        for (let i = 0; i < arr.length; i += size) {
+            let chunk = arr.slice(i, i + size); // 截取指定长度的子数组
+            result.push(chunk);
+        }
+        return result
+    },
+    getNewUp: async function(context, type){
+        const res=await axios({
+            url:`/top/album?area=${type}`,
+            method:"get"
+        })
+       try {
+           context.state.NewUpList[type]["month"] = await context.dispatch("sliceArr",await res.data["monthData"])
+           context.state.NewUpList[type]["week"] = await context.dispatch("sliceArr",await res.data["weekData"])
+       }catch (err){
+           console.log(err)
+       }
 
 
     }
@@ -99,6 +121,13 @@ const state={
         96:"",
         8:"",
         16:""
+    },
+    NewUpList:{
+        ALL:{week:'',month:''},
+        ZH:{week:'',month:''},
+        EA:{week:'',month:''},
+        KR:{week:'',month:''},
+        JP:{week:'',month:''}
     }
 }
 const mutations={}
