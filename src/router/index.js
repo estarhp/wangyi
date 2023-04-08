@@ -1,7 +1,7 @@
 import VueRouter from "vue-router";
-import MainPage from "@/components/MainPage";
-import NewPush from "@/components/NewPush";
-import NewUp from "@/components/NewUp";
+import MainPage from "@/components/Main/MainPage";
+import NewPush from "@/components/Main/Customization/New/NewPush";
+import NewUp from "@/components/Main/Customization/New/NewUp";
 
 
 export default new VueRouter({

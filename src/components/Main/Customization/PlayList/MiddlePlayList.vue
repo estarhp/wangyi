@@ -6,13 +6,13 @@
         <button ref="button"  style="
         height: 40px;
         width: 90px;
-
+        margin-left: 20px;
         line-height: 40px;
         border-radius: 17px;
         border: 1px black;
         "
                 @click="isShow=!isShow">
-          更多菜单<i class="el-icon-arrow-right el-icon--right"></i>
+          {{this.$store.state.category}}<i class="el-icon-arrow-right el-icon--right"></i>
         </button>
 
         <ul ref="dropdown"
@@ -28,8 +28,8 @@
             border: 0.5px solid gray;
             z-index: 1;">
           <li style="height: 50px;display: flex;align-items: center;border-bottom: 1px solid gray;padding: 0;" >
-            <div :class=" 'button-up'+isActive('全部歌单')" style="font-size: 12px; margin-left: 10px"
-                 data-id="全部歌单"  @click="handleClick">全部歌单</div>
+            <div :class=" 'button-up'+isActive('全部')" style="font-size: 12px; margin-left: 10px"
+                 data-id="全部"  @click="handleClick">全部歌单</div>
 
           </li>
 
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import Tags from "@/components/Tags";
+import Tags from "@/components/Main/Customization/PlayList/Tags";
 export default {
   name: "MiddlePlayList",
   components:{Tags},

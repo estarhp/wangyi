@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import axios from "axios";
+import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 
 Vue.use(Vuex);
@@ -100,54 +101,73 @@ const actions= {
         }
 
 
-    }   ,
+    },
     getPlaylistTag: async function (context) {
         const res = await axios({
             url: `/playlist/catlist`,
             method: "get"
         })
-        for (let i =0;i<res.data.sub.length;i++) {
-            if(!(context.state.tags[res.data.sub[i].category].includes(res.data.sub[i]))){
-                Vue.set(context.state.highPlayList,res.data.sub[i].name,[])
+        for (let i = 0; i < res.data.sub.length; i++) {
+            if (!(context.state.tags[res.data.sub[i].category].includes(res.data.sub[i]))) {
+                Vue.set(context.state.highPlayList, res.data.sub[i].name, [])
                 context.state.tags[res.data.sub[i].category].push(res.data.sub[i])
             }
         }
 
     },
+    getDetailPlayList: async function (context,id) {
+        const res = await axios({
+            url: `/playlist/detail?id=${id}`,
+            method: "get"
+        })
+        context.state.playListDetail=res.data["playlist"]
+    },
+    getAllSongs: async function(context,id){
+        const res = await axios({
+            url: `/playlist/track/all?id=${id}`,
+            method: "get"
+        })
+        context.state.AllSongs=res.data
 
+    },
+    duration(context,dt){
+
+        let timestamp=Math.floor(parseInt(dt)/1000)
+        let minutes = Math.floor(timestamp / 60);
+        let seconds = timestamp % 60;
+        let time = seconds>=10 ?`${minutes}:${seconds}`: `${minutes}:0${seconds}`
+        return time
+    }
+}
+const state= {
+
+    category: "全部",
+    isLogin: false,
+    userData: "",
+    qrImg: "",
+    userDetail: "",
+    timer: "",
+    tags: [[], [], [], [], []],
+    NewPushList: {
+        0: "",
+        7: "",
+        96: "",
+        8: "",
+        16: ""
+    },
+    highPlayList: {},
+    NewUpList: {
+        ALL: {week: '', month: ''},
+        ZH: {week: '', month: ''},
+        EA: {week: '', month: ''},
+        KR: {week: '', month: ''},
+        JP: {week: '', month: ''}
+    },
+    playListDetail: "",
+    AllSongs:""
 }
 
-const state={
 
-  category:"全部歌单",
-  isLogin:false,
-  userData:"",
-    qrImg:"",
-    userDetail:"",
-    timer:"",
-    tags:[[],[],[],[],[]],
-    NewPushList:{
-      0:"",
-        7:"",
-        96:"",
-        8:"",
-        16:""
-    },
-    highPlayList:{
-
-    },
-    NewUpList:{
-        ALL:{week:'',month:''},
-        ZH:{week:'',month:''},
-        EA:{week:'',month:''},
-        KR:{week:'',month:''},
-        JP:{week:'',month:''}
-    },
-
-
-
-
-}
 const mutations={}
 
 const store = new Vuex.Store({

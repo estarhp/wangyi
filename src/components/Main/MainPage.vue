@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import NewMusic from "@/components/NewMusic";
-import Customize from "@/components/Customize";
-import PlayList from "@/components/PlayList";
+import NewMusic from "@/components/Main/Customization/New/NewMusic";
+import Customize from "@/components/Main/Customization/Customize";
+import PlayList from "@/components/Main/Customization/PlayList/PlayList";
 export default {
   name: "MainPage",
   components: {Customize,NewMusic,PlayList},

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import PlayAlum from "@/components/PlayAlum";
+import PlayAlum from "@/components/Main/Customization/New/PlayAlum";
 export default {
   name: "NewUpItem",
   props:["area",'select'],

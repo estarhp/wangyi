@@ -24,9 +24,9 @@
 <script>
 
 
-import Navigation from "@/components/Navigation";
-import Myaside from "@/components/Myaside";
-import MainPage from "@/components/MainPage";
+import Navigation from "@/components/Top/Navigation";
+import Myaside from "@/components/Main/Myaside";
+import MainPage from "@/components/Main/MainPage";
 
 export default {
   name: 'App',
@@ -44,6 +44,7 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch("getPlaylistTag")
+    this.$store.dispatch("getDetailPlayList",3233164347)
   }
 }
 </script>

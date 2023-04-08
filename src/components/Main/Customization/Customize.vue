@@ -19,7 +19,7 @@
 
 <script>
 import axios from "axios";
-import PlayListItem from "@/components/PlayListItem"
+import PlayListItem from "@/components/Main/Customization/PlayList/PlayListItem"
 export default {
   name: "Customize",
   components:{PlayListItem},
@@ -28,7 +28,6 @@ export default {
       urlList:'',
       allData:"",
       creativesPlayList:"",
-
     }
   },
   methods:{

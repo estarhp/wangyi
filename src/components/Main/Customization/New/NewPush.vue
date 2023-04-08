@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import NewMusicItem from "@/components/NewMusicItem";
+import NewMusicItem from "@/components/Main/Customization/New/NewMusicItem";
 export default {
   name:"NewPush",
   components:{NewMusicItem},

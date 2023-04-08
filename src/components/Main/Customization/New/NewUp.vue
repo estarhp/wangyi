@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import NewUpItem from "@/components/NewUpItem";
+import NewUpItem from "@/components/Main/Customization/New/NewUpItem";
 export default {
   name: "NewUp",
   components: {NewUpItem},

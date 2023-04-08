@@ -1,12 +1,13 @@
+
 <template>
-  <el-row type="flx" class="blur">
+  <el-row type="flx" class="blur" v-if="this.showTag[0][0]['name']" >
     <el-col :span="24"  >
       <div class="grid-content bg-purple-dark" style="text-align: left;display: flex;align-items: center; ">
-        <img
-
+        <el-image
+            v-if="showTag[0] "
             style="width: 140px; height: 140px; margin: 15px;border-radius: 10px"
-            :src="全部[0]['coverImgUrl']"
-        >
+            :src="showTag[0][0]['coverImgUrl'] "
+        ></el-image>
 
         <div>
           <router-link  tag="button" to="" style="
@@ -19,7 +20,7 @@
           background: transparent;
           color: #E7AA5A;
           border: 1px solid #E7AA5A" ><i class="el-icon-trophy"></i> 精品歌单</router-link>
-          <span >{{全部[0]['name']}}</span>
+          <span >{{showTag[0][0]['name']}}</span>
         </div>
       </div>
     </el-col>
@@ -34,21 +35,35 @@ export default {
   name: "TopPlayList",
   data(){
     return {
-     全部:""
+     showTag:""
     }
   },
   mounted() {
     this.getHighQualityList("全部")
-
   },
   methods:{
     getHighQualityList: async function (cat) {
       const res = await axios({
-        url: `/top/playlist?cat=${cat}`,
+        url: `/top/playlist/highquality?cat=${cat}`,
         method: "get"
       })
-      this.全部=res.data["playlists"]
-      this.$store.state.highPlayList[cat]=res.data["playlists"]
+      this.showTag=await this.$store.dispatch("sliceArr",res.data["playlists"])
+      this.$store.state.highPlayList[cat]=await this.$store.dispatch("sliceArr",await res.data["playlists"])
+    }
+  },
+  computed:{
+    nowTag(){
+      return this.$store.state.category
+    }
+
+  },
+  watch:{
+    nowTag:{
+      handler(value){
+        setTimeout(()=>{
+          this.showTag=this.$store.state.highPlayList[value]
+        },1000)
+      }
     }
   }
 }
@@ -85,3 +100,5 @@ export default {
   background-color: #f9fafc;
 }
 </style>
+
+

@@ -14,7 +14,7 @@
         <el-col :span="5"  ><div class="grid-content bg-purple" style="text-align: left;padding: 20px" >{{data[index]["name"]}}</div></el-col>
         <el-col :span="9" ><div class="grid-content bg-purple" >{{data[index]['artists'][0]["name"]}}</div></el-col>
         <el-col :span="4" ><div class="grid-content bg-purple">{{data[index]['album']["name"]}}</div></el-col>
-        <el-col :span="4" ><div class="grid-content bg-purple">{{duration(index)}}</div></el-col>
+        <el-col :span="4" ><div class="grid-content bg-purple">{{this.$store.dispatch("duration",this.data[index]["duration"])}}</div></el-col>
       </el-row>
     </div>
 </template>
@@ -31,14 +31,6 @@ export default {
 
   },
   methods:{
-    duration(index){
-
-      let timestamp=Math.floor(parseInt(this.data[index]["duration"])/1000)
-      let minutes = Math.floor(timestamp / 60);
-      let seconds = timestamp % 60;
-      let time = seconds>=10 ?`${minutes}:${seconds}`: `${minutes}:0${seconds}`
-      return time
-    },
     handleClick(event){
       for (let i = 0; i < 100; i++) {
         this.$refs.scroll.children[i].style.backgroundColor="white"

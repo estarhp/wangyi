@@ -1,17 +1,15 @@
 <template>
   <div style="overflow:auto" class="infinite-list">
-
     <TopPlayList></TopPlayList>
     <MiddlePlayList></MiddlePlayList>
     <ButtonPlayList></ButtonPlayList>
-    <div v-for="i in 14" style="height: 200px;background: red"></div>
   </div>
 </template>
 
 <script>
-import TopPlayList from "@/components/TopPlayList";
-import MiddlePlayList from "@/components/MiddlePlayList";
-import ButtonPlayList from "@/components/ButtonPlayList";
+import TopPlayList from "@/components/Main/Customization/PlayList/TopPlayList";
+import MiddlePlayList from "@/components/Main/Customization/PlayList/MiddlePlayList";
+import ButtonPlayList from "@/components/Main/Customization/PlayList/ButtonPlayList";
 import axios from "axios";
 export default {
   name: "PlayList",
@@ -32,9 +30,7 @@ export default {
   },
   watch:{
     category:{
-      handler(value){
-
-
+       handler(value){
         if(!this.$store.state.highPlayList.value){
           this.getHighQualityList(value)
           console.log(value)
@@ -53,10 +49,12 @@ export default {
     },
     getHighQualityList: async function (cat) {
       const res = await axios({
-        url: `/top/playlist?cat=${cat}`,
+        url: `/top/playlist/highquality?cat=${cat}`,
         method: "get"
       })
-      this.$store.state.highPlayList[cat]=res.data["playlists"]
+
+
+      this.$store.state.highPlayList[cat]=await this.$store.dispatch("sliceArr",await res.data["playlists"])
     }
 
   }
