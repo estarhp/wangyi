@@ -8,6 +8,7 @@
       <el-tab-pane label="歌手" name="five"></el-tab-pane>
       <el-tab-pane label="最新音乐" name="sixth"><NewMusic></NewMusic></el-tab-pane>
     </el-tabs>
+
 </div>
 </template>
 
@@ -30,6 +31,7 @@ export default {
   },
   mounted() {
     this.handleClick()
+
   }
 }
 </script>

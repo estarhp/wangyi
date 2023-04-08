@@ -72,18 +72,17 @@ Vue.use(InfiniteScroll)
 
 
 
-
-
-
 Vue.prototype.$axios = axios
 new Vue({
   render: h => h(App),
   store,
   router:router,
   beforeCreate() {
-    Vue.prototype.$loading = Loading.service
     Vue.prototype.$bus=this
+    Vue.prototype.$loading = Loading.service
     Vue.prototype.$alert = MessageBox.alert
+    Vue.prototype.$axios=axios
+
   }
 
 }).$mount('#app')

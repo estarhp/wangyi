@@ -25,8 +25,6 @@ const actions= {
     },
 
     login: async function login(context) {
-
-
         let timer
         let timestamp = Date.now()
         const cookie = localStorage.getItem('cookie')
@@ -60,7 +58,6 @@ const actions= {
         }, 3000)
         context.state.timer = timer
     },
-
     getUserDetail: async function getUserDetail(context) {
 
         const res = await axios({
@@ -103,40 +100,41 @@ const actions= {
         }
 
 
-    },
-    getHighQualityList: async function (context, cat) {
-        const res = await axios({
-            url: `/top/playlist/highquality?cat=${cat}`,
-            method: "get"
-        })
-        Vue.set(context.state.highPlayList,cat,res.data.playlists)
-    },
+    }   ,
     getPlaylistTag: async function (context) {
         const res = await axios({
-            url: `/playlist/highquality/tags`,
+            url: `/playlist/catlist`,
             method: "get"
         })
-        context.state.tags=res.data.tags
-        console.log(context.state.tags)
+        for (let i =0;i<res.data.sub.length;i++) {
+            if(!(context.state.tags[res.data.sub[i].category].includes(res.data.sub[i]))){
+                Vue.set(context.state.highPlayList,res.data.sub[i].name,[])
+                context.state.tags[res.data.sub[i].category].push(res.data.sub[i])
+            }
+        }
+
     },
 
 }
 
-
-
 const state={
+
+  category:"全部歌单",
   isLogin:false,
   userData:"",
     qrImg:"",
     userDetail:"",
     timer:"",
-    tags:'',
+    tags:[[],[],[],[],[]],
     NewPushList:{
       0:"",
         7:"",
         96:"",
         8:"",
         16:""
+    },
+    highPlayList:{
+
     },
     NewUpList:{
         ALL:{week:'',month:''},
@@ -145,9 +143,10 @@ const state={
         KR:{week:'',month:''},
         JP:{week:'',month:''}
     },
-    highPlayList:{
 
-    }
+
+
+
 }
 const mutations={}
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="test">
 
    <el-container>
       <el-header>
@@ -37,7 +37,13 @@ export default {
     }
   },
   methods:{
+   test(event){
 
+     this.$bus.$emit("outClick",event)
+   }
+  },
+  beforeCreate() {
+    this.$store.dispatch("getPlaylistTag")
   }
 }
 </script>

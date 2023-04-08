@@ -45,9 +45,7 @@ export default {
         url:`/recommend/resource`,
         method: 'get'
       })
-      console.log(res.data)
       this.creativesPlayList=res.data["recommend"]
-
     }
     },
     mounted() {
