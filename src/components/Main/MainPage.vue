@@ -44,9 +44,7 @@ export default {
 }
 .el-tabs__nav {
   height: 50px;
-
 }
-
 
 .el-tabs__item:hover {
   color: #333333;

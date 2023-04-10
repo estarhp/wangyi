@@ -12,7 +12,7 @@
             <router-view></router-view>
           </el-main>
         </el-container>
-        <el-footer style="height: 80px"></el-footer>
+        <el-footer style="height: 80px;z-index: 10"></el-footer>
       </el-container>
     </el-container>
 
@@ -44,7 +44,8 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch("getPlaylistTag")
-    this.$store.dispatch("getDetailPlayList",3233164347)
+    // this.$store.dispatch("getDetailPlayList",3233164347)
+    this.$store.dispatch("getLoveList")
   }
 }
 </script>

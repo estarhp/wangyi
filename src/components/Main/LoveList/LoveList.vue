@@ -9,11 +9,14 @@
 import TopDetail from "@/components/Main/DetailofPlayList/TopDetail";
 import BottomDetail from "@/components/Main/DetailofPlayList/BottomDetail";
 export default {
-  name: "PlayListDetail",
+  name: "LoveList",
   components:{TopDetail,BottomDetail},
+  created() {
+    this.$store.state.playListDetail=undefined
+  },
   mounted() {
-    this.$store.dispatch("getDetailPlayList",this.$route.query.id)
-  }
+
+    this.$store.dispatch("getDetailPlayList",this.$route.query.id)}
 }
 </script>
 

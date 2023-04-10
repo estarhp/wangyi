@@ -2,7 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import axios from "axios";
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
+
+
+
 
 
 Vue.use(Vuex);
@@ -121,23 +123,35 @@ const actions= {
             method: "get"
         })
         context.state.playListDetail=res.data["playlist"]
+        await context.dispatch("getAllSongs",id)
+        await context.dispatch("getAllComment",id)
     },
     getAllSongs: async function(context,id){
         const res = await axios({
             url: `/playlist/track/all?id=${id}`,
             method: "get"
         })
-        context.state.AllSongs=res.data
+        context.state.AllSongs=res.data['songs']
+
 
     },
-    duration(context,dt){
+    getAllComment: async function(context,id){
+        const res= await axios({
+            url:`/comment/playlist?id=${id}&limit=100`,
+            method:"get"
+        })
+        context.state.AllComment=res.data
+    },
+    getLoveList:async function(context){
+         let res=await axios({
+             url:`/user/playlist?uid=${context.state.userData["account"]["id"]}`,
+             method:"get"
+         })
 
-        let timestamp=Math.floor(parseInt(dt)/1000)
-        let minutes = Math.floor(timestamp / 60);
-        let seconds = timestamp % 60;
-        let time = seconds>=10 ?`${minutes}:${seconds}`: `${minutes}:0${seconds}`
-        return time
+        context.state.LikeListID=res.data['playlist'][0]['id']
+        context.state.MyPlayList=res.data['playlist']
     }
+
 }
 const state= {
 
@@ -164,7 +178,11 @@ const state= {
         JP: {week: '', month: ''}
     },
     playListDetail: "",
-    AllSongs:""
+    AllSongs:"",
+    AllComment:"",
+    LikeListID:'',
+    MyPlayList:""
+
 }
 
 

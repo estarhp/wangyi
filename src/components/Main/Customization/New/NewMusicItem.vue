@@ -1,5 +1,5 @@
-<template>
 
+<template>
     <div  @click.stop="handleClick" >
       <el-row  v-for="(i,index) in data" type="flex" align="middle" justify="center" class="New-el-row">
         <el-col :span="2" >
@@ -14,7 +14,7 @@
         <el-col :span="5"  ><div class="grid-content bg-purple" style="text-align: left;padding: 20px" >{{data[index]["name"]}}</div></el-col>
         <el-col :span="9" ><div class="grid-content bg-purple" >{{data[index]['artists'][0]["name"]}}</div></el-col>
         <el-col :span="4" ><div class="grid-content bg-purple">{{data[index]['album']["name"]}}</div></el-col>
-        <el-col :span="4" ><div class="grid-content bg-purple">{{this.$store.dispatch("duration",this.data[index]["duration"])}}</div></el-col>
+        <el-col :span="4" ><div class="grid-content bg-purple">{{duration(data[index]["duration"])}}</div></el-col>
       </el-row>
     </div>
 </template>
@@ -25,7 +25,8 @@ export default {
   props:["number"],
   data(){
     return {
-    data:this.$store.state.NewPushList[this.number]
+    data:this.$store.state.NewPushList[this.number],
+
     }
   },mounted() {
 
@@ -36,8 +37,21 @@ export default {
         this.$refs.scroll.children[i].style.backgroundColor="white"
       }
       event.target.parentElement.parentElement.style.backgroundColor="rgb(240,240,240)"
+    },
+    duration:function (dt){
+      let timestamp=Math.floor(parseInt(dt)/1000)
+      let minutes = Math.floor(timestamp / 60);
+      let seconds = timestamp % 60;
+      let time = seconds>=10 ?`${minutes}:${seconds}`: `${minutes}:0${seconds}`
+      return time
     }
+
+
   },
+  computed:{
+
+
+}
 
 
 }
