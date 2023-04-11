@@ -1,17 +1,12 @@
 <template>
-<div style="overflow:auto;z-index: 0;height: 84vh" class="infinite-list">
-  <el-row class="tac" style="height: 84vh">
-    <el-col :span="24" style="height: 84vh" >
+<div style="overflow:auto;z-index: 0;height: 77vh" class="infinite-list">
+  <el-row class="tac" >
+    <el-col :span="24"  >
       <el-menu
           background-color="white"
           text-color="rgba(51,51,51)"
-          default-active="2"
+
           class="el-menu-vertical-demo"
-          style="height: 84vh"
-
-
-
-
           >
         <router-link to="/MainPage" style="text-decoration: none">
           <el-menu-item index="1" >
@@ -38,7 +33,7 @@
         <el-menu-item style="background-color: white !important;color: rgb(153,153,153)">
           <span slot="title">我的音乐</span>
         </el-menu-item>
-        <router-link :to="{path:'/DetailLike',query:{id:this.$store.state.LikeListID}}" style="text-decoration: none">
+        <router-link :to="{path:'/Detail',query:{id:this.$store.state.LikeListID}}" style="text-decoration: none">
         <el-menu-item index="7">
           <span slot="title">我喜欢的音乐</span>
         </el-menu-item>
@@ -54,19 +49,14 @@
           <span slot="title">我的音乐盒</span>
         </el-menu-item>
         <el-menu-item index="11">
-          <span slot="title">我的播客</span>
-        </el-menu-item>
-        <el-menu-item index="12">
           <span slot="title">我的收藏</span>
         </el-menu-item>
-        <el-collapse v-model="activeNames" @change="handleChange" >
-          <el-collapse-item title="创建的歌单" name="1">
-            <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-            <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+        <el-collapse v-model="activeNames" @change="handleChange" style="text-align: left;">
+          <el-collapse-item title="创建的歌单" name="1" style="margin: 10px 0px;">
+          <router-link :to="{path: 'Detail',query: {id:i['id']}}" :ref="i['id']"  style=" text-decoration: none;color: #333333" v-for="i in this.$store.state.MyCreateList"><el-menu-item :index="i.index" style="width: 100%;overflow: hidden;height: 30px;line-height: 30px;padding-left: 20px">  <span slot="title"><i class="el-icon-s-unfold"></i> {{i.name}}</span></el-menu-item></router-link>
           </el-collapse-item>
-          <el-collapse-item title="收藏的歌单" name="2" style="z-index: -1;position: relative">
-            <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-            <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+          <el-collapse-item title="收藏的歌单" name="2">
+            <router-link :to="{path: 'Detail',query: {id:i['id']}}" :ref="i['id']"  style=" text-decoration: none;color: #333333" v-for="i in this.$store.state.MyLoveList"><el-menu-item  :index="i.index" style="width: 100%;overflow: hidden;height: 30px;line-height: 30px;padding-left: 20px">  <span slot="title"><i class="el-icon-s-unfold"></i> {{i.name}}</span></el-menu-item></router-link>
           </el-collapse-item>
         </el-collapse>
 
@@ -93,6 +83,13 @@
 </div>
 </template>
 
+<style>
+.el-collapse-item__header {
+  text-align: center;
+  padding-left: 20px;
+}
+</style>
+
 <script>
 
 export default {
@@ -101,6 +98,9 @@ export default {
     return {
       activeNames: ['']
     }
+  },
+  created() {
+
   },
   methods:{
     handleChange(val) {
@@ -113,8 +113,7 @@ export default {
 
 <style>
 .el-collapse-item__content {
-  position: relative;
-  z-index: -1;
+  padding: 0px;
 }
 </style>
 
@@ -130,10 +129,6 @@ span {
 }
 .el-menu-item:hover {
  background-color: rgb(246,246,247) !important;
-}
-
-.hhh {
-  font-weight: 1000;
 }
 
 .gedan {

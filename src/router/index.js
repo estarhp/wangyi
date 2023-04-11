@@ -3,7 +3,8 @@ import MainPage from "@/components/Main/MainPage";
 import NewPush from "@/components/Main/Customization/New/NewPush";
 import NewUp from "@/components/Main/Customization/New/NewUp";
 import PlayListDetail from "@/components/Main/DetailofPlayList/PlayListDetail";
-import LoveList from "@/components/Main/LoveList/LoveList";
+import MyDetail from "@/components/Top/MyDetail/MyDetail";
+
 
 
 export default new VueRouter({
@@ -24,10 +25,11 @@ export default new VueRouter({
         path:"/Detail",
         component:PlayListDetail
     },
-    {
-        path:"/DetailLike",
-        component:LoveList
-    },
+        {
+            path:"/MyDetail",
+            component:MyDetail
+        }
+
 
     ]
 

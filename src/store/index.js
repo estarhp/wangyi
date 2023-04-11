@@ -10,14 +10,16 @@ import axios from "axios";
 Vue.use(Vuex);
 
 const actions= {
-    getLoginStatus: async function getLoginStatus(context, cookie = '') {
+        getLoginStatus: async function getLoginStatus(context, ) {
         const res = await axios({
             url: `/login/status?timestamp=${Date.now()}`,
             method: 'post',
-            data: {
-                cookie,
-            },
+
         })
+        context.state.userData = res.data.data
+
+        await context.dispatch('getLoveList',res.data.data["account"]["id"])
+         await context.dispatch("getUserDetail",res.data.data["account"]["id"])
         return res
     },
     checkStatus: async function checkStatus(context, key) {
@@ -31,8 +33,7 @@ const actions= {
         let timer
         let timestamp = Date.now()
         const cookie = localStorage.getItem('cookie')
-        context.state.userData = (await context.dispatch("getLoginStatus", cookie)).data
-        console.log(context.state.userData)
+        // context.state.userData = (await context.dispatch("getLoginStatus", cookie)).data
         const res = await axios({
             url: `/login/qr/key?timestamp=${Date.now()}`,
         })
@@ -55,22 +56,19 @@ const actions= {
                 // 这一步会返回cookie
                 clearInterval(timer)
                 alert('授权登录成功')
-                await context.dispatch("getLoginStatus", statusRes.cookie)
-                localStorage.setItem('cookie', statusRes.cookie)
+                // await context.dispatch("getLoginStatus", statusRes.cookie)
+                // localStorage.setItem('cookie', statusRes.cookie)
             }
         }, 3000)
         context.state.timer = timer
     },
-    getUserDetail: async function getUserDetail(context) {
+    getUserDetail: async function getUserDetail(context,uid) {
 
         const res = await axios({
-            url: `/user/detail?uid=${context.state.userData["account"]["id"]}`,
+            url: `/user/detail?uid=${uid}`,
             method: 'get',
         })
-        console.log(res.data)
         context.state.userDetail = res.data
-
-
     },
 
     getNewPush: async function (context, type) {
@@ -142,14 +140,17 @@ const actions= {
         })
         context.state.AllComment=res.data
     },
-    getLoveList:async function(context){
+    getLoveList:async function(context,uid){
+        console.log(context.state.userData["account"])
          let res=await axios({
-             url:`/user/playlist?uid=${context.state.userData["account"]["id"]}`,
+             url:`/user/playlist?uid=${uid}`,
              method:"get"
          })
-
         context.state.LikeListID=res.data['playlist'][0]['id']
-        context.state.MyPlayList=res.data['playlist']
+        let otherList=res.data['playlist'].slice(1)
+        console.log(otherList)
+        for (let i = 0; i < otherList.length; i++) {
+            otherList[i]["userId"]==uid ? context.state.MyCreateList.push(otherList[i]):context.state.MyLoveList.push(otherList[i])        }
     }
 
 }
@@ -181,7 +182,8 @@ const state= {
     AllSongs:"",
     AllComment:"",
     LikeListID:'',
-    MyPlayList:""
+    MyCreateList:[],
+    MyLoveList:[]
 
 }
 

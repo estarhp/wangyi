@@ -19,9 +19,10 @@
       </div></el-col>
       <el-col :span="6" :offset="3" type="flex" ><div class="grid-content bg-purple">
        <el-row type="flex" align="middle" justify="center">
-         <el-avatar icon="el-icon-user-solid" :size="35" :src="avater" >
-
-         </el-avatar>&nbsp;
+         <router-link to="/MyDetail" style="text-decoration: none;vertical-align: center;line-height: 100%">
+           <el-avatar icon="el-icon-user-solid" :size="35" :src="avater" >
+           </el-avatar>&nbsp;
+         </router-link>
 
          <el-link :underline="false" type="info" @click="open" v-if="!this.$store.state.isLogin">未登录<i class="el-icon-caret-bottom"></i></el-link>
          <el-dropdown trigger="click" v-else>

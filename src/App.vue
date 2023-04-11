@@ -8,16 +8,13 @@
      <el-container>
       <el-container>
          <el-aside width="200px"><Myaside/></el-aside>
-          <el-main>
+          <el-main >
             <router-view></router-view>
           </el-main>
         </el-container>
         <el-footer style="height: 80px;z-index: 10"></el-footer>
       </el-container>
     </el-container>
-
-
-
   </div>
 </template>
 
@@ -44,8 +41,7 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch("getPlaylistTag")
-    // this.$store.dispatch("getDetailPlayList",3233164347)
-    this.$store.dispatch("getLoveList")
+    // this.$store.dispatch("getLoginStatus")
   }
 }
 </script>

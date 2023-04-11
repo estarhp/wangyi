@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow:auto;height: 66vh">
     <el-carousel :interval="4000" type="card" height="200px">
       <el-carousel-item v-for="item in urlList" :key="item.bannerId">
         <el-image :src="item.pic" fit="scale-down" ></el-image>

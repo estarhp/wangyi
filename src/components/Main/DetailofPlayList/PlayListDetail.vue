@@ -13,6 +13,11 @@ export default {
   components:{TopDetail,BottomDetail},
   mounted() {
     this.$store.dispatch("getDetailPlayList",this.$route.query.id)
+  },
+  beforeRouteUpdate:function (to,from){
+    if(to.query.id !== from.query.id) {
+      this.$store.dispatch("getDetailPlayList", to.query.id)
+    }
   }
 }
 </script>

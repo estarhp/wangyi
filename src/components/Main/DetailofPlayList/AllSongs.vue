@@ -58,7 +58,6 @@ export default {
   border-radius: 4px;
   height: 35px;
   line-height: 35px;
-
 }
 
 

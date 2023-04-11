@@ -27,7 +27,6 @@ export default {
   methods: {
     handleClick(tab, event) {
     },
-
   },
   mounted() {
     this.handleClick()
@@ -72,8 +71,6 @@ export default {
   width: 100%;
   line-height: 63px;
   background-color: white;
-
-
 }
 
 </style>
