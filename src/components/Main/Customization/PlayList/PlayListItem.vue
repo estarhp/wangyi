@@ -3,7 +3,7 @@
   <el-card :body-style="{ padding: '0px' }" shadow="never">
     <router-link :to="{path:'/Detail',query:{id:this.id}} ">
 
-      <el-image :src="src+'?param=200y200'" class="image" :title="details" :lazy="true"  ></el-image>
+      <el-image :src="src+'?param=200y200'" class="image" :title="details"  :lazy="lazy" ></el-image>
 
       <div class="bottom">
         <div class="bottom clearfix">
@@ -18,7 +18,7 @@
 <script>
 export default {
   name: "PlayListItem",
-  props:["src","details","id","playCount"],
+  props:["src","details","id","playCount","lazy"],
   computed:{
     playCounts(){
       if(this.playCount>100000000){

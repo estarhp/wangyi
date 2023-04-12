@@ -1,5 +1,10 @@
 <template>
 <div style="height: 200px;">
+  <router-link to="/Edit">
+    <div class="edit">
+      <i class="el-icon-edit"></i> 编辑个人信息
+    </div>
+  </router-link>
   <el-row :gutter="20">
     <el-col :span="6" >
       <div class="grid-content bg-purple">
@@ -10,7 +15,7 @@
       <el-col :span="17" >
         <div class="grid-content bg-purple">
           <h1 style="font-size: 25px;margin: 20px 0px;height: 30px;;line-height: 30px">{{userDetail.profile["nickname"]}}</h1>
-          <div style="height: 20px;font-size: 10px;font-weight: 400;"> <i class="el-icon-collection-tag"></i>LV{{userDetail["level"]}}</div>
+          <div style="height: 20px;width:100px;font-size: 10px;font-weight: 400;"> <i class="el-icon-collection-tag"></i>LV{{userDetail["level"]}}</div>
           <hr >
         </div>
       </el-col>
@@ -58,7 +63,7 @@ export default {
     },
 
   },mounted(){
-    console.log(123,this.$store.state.userDetail)
+
   }
 }
 </script>
@@ -66,6 +71,23 @@ export default {
 
 
 <style scoped lang="less">
+
+
+.edit {
+  position: absolute;
+  height: 30px;
+  width: 130px;
+  border-radius: 20px;
+  top: 130px;
+  right: 40px;
+  border: 1px solid #333333;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  color: #333333;
+  z-index: 10;
+}
+
 .el-row {
   margin-bottom: 20px;
 &:last-child {
@@ -81,9 +103,6 @@ export default {
   min-height: 36px;
   line-height: 100%;
   text-align: left;
-
-
-
 }
 .row-bg {
   padding: 10px 0;

@@ -65,7 +65,7 @@ const actions= {
     getUserDetail: async function getUserDetail(context,uid) {
 
         const res = await axios({
-            url: `/user/detail?uid=${uid}`,
+            url: `/user/detail?uid=${uid}&timestamp=${Date.now()}`,
             method: 'get',
         })
         context.state.userDetail = res.data
@@ -160,7 +160,7 @@ const state= {
     isLogin: false,
     userData: "",
     qrImg: "",
-    userDetail: "",
+    userDetail: '',
     timer: "",
     tags: [[], [], [], [], []],
     NewPushList: {

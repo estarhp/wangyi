@@ -19,7 +19,7 @@
                   style="margin: 0px -90px"
                   v-for="(i,index) in MyLoveList"
           >
-            <el-col v-for="j in i" :span="4"  :key="i.id"><PlayListItem :src="j.coverImgUrl" :details="j.name" :id="j.id"  :playCount="j['playCount']" ></PlayListItem></el-col>
+            <el-col v-for="j in i" :span="4"  :key="i.id"><PlayListItem :src="j.coverImgUrl" :details="j.name" :id="j.id"  :playCount="j['playCount']" :lazy="false" ></PlayListItem></el-col>
           </el-row>
         </el-tab-pane>
         <el-tab-pane label="创建建的音乐栏" name="third">我没做，hhhh</el-tab-pane>
