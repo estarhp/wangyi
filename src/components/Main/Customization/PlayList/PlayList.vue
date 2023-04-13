@@ -10,7 +10,7 @@
 import TopPlayList from "@/components/Main/Customization/PlayList/TopPlayList";
 import MiddlePlayList from "@/components/Main/Customization/PlayList/MiddlePlayList";
 import ButtonPlayList from "@/components/Main/Customization/PlayList/ButtonPlayList";
-import axios from "axios";
+
 export default {
   name: "PlayList",
   components:{ButtonPlayList,TopPlayList,MiddlePlayList},
@@ -29,15 +29,7 @@ export default {
     }
   },
   watch:{
-    category:{
-       handler(value){
-        if(!this.$store.state.highPlayList.value){
-          this.getHighQualityList(value)
-          console.log(value)
-        }
 
-      }
-    }
   },
   mounted() {
     this.$bus.$on("tagClick",this.handleClick)
@@ -47,15 +39,6 @@ export default {
     handleClick(event) {
       this.$store.state.category=event.target.dataset.id
     },
-    getHighQualityList: async function (cat) {
-      const res = await axios({
-        url: `/top/playlist/highquality?cat=${cat}`,
-        method: "get"
-      })
-
-
-      this.$store.state.highPlayList[cat]=await this.$store.dispatch("sliceArr",await res.data["playlists"])
-    }
 
   }
 }

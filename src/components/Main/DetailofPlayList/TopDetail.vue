@@ -1,9 +1,11 @@
 <template>
-  <el-row style="height: auto;background-color: white" type="flex" >
+  <el-row style="height: auto;background-color: white" type="flex" v-if="details">
     <el-col :span="6">
       <el-image :src="this.$store.state.playListDetail['coverImgUrl']"
                 style="width: 180px; height: 180px; margin: 10px;border-radius: 10px">
-
+        <div slot="placeholder" class="image-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div>
       </el-image>
     </el-col>
     <el-col :span="18" style="padding: 10px;text-align: left">

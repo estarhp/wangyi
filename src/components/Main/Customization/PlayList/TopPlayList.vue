@@ -1,13 +1,17 @@
 
 <template>
-  <el-row type="flx" class="blur" >
+  <el-row type="flx" class="blur" v-if="showTag">
     <el-col :span="24"  >
       <div class="grid-content bg-purple-dark" style="text-align: left;display: flex;align-items: center; ">
         <el-image
-
+            v-if="showTag!==''"
             style="width: 140px; height: 140px; margin: 15px;border-radius: 10px"
-            :src="showTag['coverImgUrl']"
-        ></el-image>
+            :src="showTag[0][0]['coverImgUrl']+'?param=200y200'"
+        >
+          <div slot="placeholder" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
 
         <div>
           <router-link  tag="button" to="" style="
@@ -20,7 +24,7 @@
           background: transparent;
           color: #E7AA5A;
           border: 1px solid #E7AA5A" ><i class="el-icon-trophy"></i> 精品歌单</router-link>
-          <span >{{showTag['name']}}</span>
+          <span v-if="showTag!==''">{{showTag[0][0]['name']}}</span>
         </div>
       </div>
     </el-col>
@@ -39,22 +43,15 @@ export default {
     }
   },
   created() {
-    console.log(123)
-    this.getHighQualityList("全部")
+    this.$store.dispatch("getHighQualityList","全部").then(
+        res=>{
+          this.showTag=this.$store.state.highPlayList
+        }
+    )
   },
-  methods:{
-    getHighQualityList: function (cat) {
-      this.$axios({
-        url: `/top/playlist/highquality?cat=${cat}`,
-        method: "get"
-      }).then(res => {
-        this.$store.dispatch("sliceArr",res.data["playlists"]).then(res=>{
-          this.showTag=res[0][0]
-        })
-        this.$store.state.highPlayList[cat]= this.$store.dispatch("sliceArr",res.data["playlists"])
-      })
+  methods: {
 
-  }},
+  },
   computed:{
     nowTag(){
       return this.$store.state.category
@@ -64,9 +61,18 @@ export default {
   watch:{
     nowTag:{
       handler(value){
-        setTimeout(()=>{
-          this.showTag=this.$store.state.highPlayList[value]
-        },1000)
+        this.$store.dispatch("getHighQualityList",value).then(
+            res =>{
+
+              this.showTag=this.$store.state.highPlayList
+              if(this.showTag.length==0){
+                this.showTag=false
+              }
+
+            }
+
+        )
+
       }
     }
   }

@@ -3,7 +3,11 @@
     <el-card :body-style="{ padding: '0px' }" shadow="never">
       <a :href='"https://music.163.com/playlist?id="+id'>
 
-        <el-image :src="src+'?param=200y200'" class="image" :title="details" :lazy="true"  ></el-image>
+        <el-image :src="src+'?param=200y200'" class="image" :title="details" :lazy="true"  >
+          <div slot="placeholder" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
 
         <div class="bottom">
           <div class="bottom clearfix">

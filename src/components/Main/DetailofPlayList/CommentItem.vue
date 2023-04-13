@@ -2,7 +2,11 @@
 <el-row>
   <el-col :span="1">
     <div class="grid-content bg-purple">
-      <el-avatar :src="comments.user['avatarUrl']"></el-avatar>
+      <el-avatar :src="comments.user['avatarUrl']">
+        <div slot="placeholder" class="image-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div>
+      </el-avatar>
     </div>
   </el-col>
   <el-col :span="23" style="text-align: left;font-size: 12px;line-height: 16px;padding-left: 10px"><div class="grid-content bg-purple">

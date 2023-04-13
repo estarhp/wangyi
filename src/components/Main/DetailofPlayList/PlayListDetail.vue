@@ -16,6 +16,7 @@ export default {
   },
   beforeRouteUpdate:function (to,from){
     if(to.query.id !== from.query.id) {
+      location.hash=`?Detail?id=${to.query.id}`
       this.$store.dispatch("getDetailPlayList", to.query.id)
     }
   }

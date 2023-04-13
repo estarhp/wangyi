@@ -32,7 +32,6 @@ const actions= {
     login: async function login(context) {
         let timer
         let timestamp = Date.now()
-        const cookie = localStorage.getItem('cookie')
         // context.state.userData = (await context.dispatch("getLoginStatus", cookie)).data
         const res = await axios({
             url: `/login/qr/key?timestamp=${Date.now()}`,
@@ -55,7 +54,7 @@ const actions= {
             if (statusRes.code === 803) {
                 // 这一步会返回cookie
                 clearInterval(timer)
-                alert('授权登录成功')
+                setTimeout(()=>location.reload (),2000)
                 // await context.dispatch("getLoginStatus", statusRes.cookie)
                 // localStorage.setItem('cookie', statusRes.cookie)
             }
@@ -67,6 +66,8 @@ const actions= {
         const res = await axios({
             url: `/user/detail?uid=${uid}&timestamp=${Date.now()}`,
             method: 'get',
+        }).catch(err=>{
+            alert("为了你的体验，你最好先登录哟：点击头像旁的未登录来进行登录")
         })
         context.state.userDetail = res.data
     },
@@ -109,11 +110,19 @@ const actions= {
         })
         for (let i = 0; i < res.data.sub.length; i++) {
             if (!(context.state.tags[res.data.sub[i].category].includes(res.data.sub[i]))) {
-                Vue.set(context.state.highPlayList, res.data.sub[i].name, [])
+
                 context.state.tags[res.data.sub[i].category].push(res.data.sub[i])
             }
         }
 
+    },
+    getHighQualityList: async function (context,cat) {
+        const res = await axios({
+            url: `/top/playlist/highquality?cat=${cat}`,
+            method: "get"
+        })
+        console.log(res.data)
+        context.state.highPlayList=await context.dispatch("sliceArr",await res.data["playlists"])
     },
     getDetailPlayList: async function (context,id) {
         const res = await axios({
@@ -141,14 +150,12 @@ const actions= {
         context.state.AllComment=res.data
     },
     getLoveList:async function(context,uid){
-        console.log(context.state.userData["account"])
          let res=await axios({
              url:`/user/playlist?uid=${uid}`,
              method:"get"
          })
         context.state.LikeListID=res.data['playlist'][0]['id']
         let otherList=res.data['playlist'].slice(1)
-        console.log(otherList)
         for (let i = 0; i < otherList.length; i++) {
             otherList[i]["userId"]==uid ? context.state.MyCreateList.push(otherList[i]):context.state.MyLoveList.push(otherList[i])        }
     }

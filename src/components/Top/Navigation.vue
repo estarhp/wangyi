@@ -21,6 +21,9 @@
        <el-row type="flex" align="middle" justify="center">
          <router-link to="/MyDetail" style="text-decoration: none;vertical-align: center;line-height: 100%">
            <el-avatar icon="el-icon-user-solid" :size="35" :src="avater" >
+             <div slot="placeholder" class="image-slot">
+               <i class="el-icon-picture-outline"></i>
+             </div>
            </el-avatar>&nbsp;
          </router-link>
 
@@ -34,20 +37,21 @@
         {{this.$store.state.userData.profile["nickname"]}}<i class="el-icon-caret-bottom"></i>
       </el-link>
            <el-dropdown-menu slot="dropdown" style="width: 300px;overflow: hidden;margin-right: -100px;margin-top: 0">
-             <el-dropdown-item style="height: 120px"></el-dropdown-item>
+             <el-dropdown-item style="height: 120px">编辑个人信息请点击头像(⊙o⊙)</el-dropdown-item>
              <el-dropdown-item icon="el-icon-headset">会员中心</el-dropdown-item>
              <el-dropdown-item icon="el-icon-medal">等级</el-dropdown-item>
              <el-dropdown-item icon="el-icon-shopping-bag-2">商城</el-dropdown-item>
              <el-dropdown-item icon="el-icon-s-custom">个人信息设置</el-dropdown-item>
              <el-dropdown-item icon="el-icon-connection">绑定社交帐号</el-dropdown-item>
              <el-dropdown-item icon="el-icon-service">我的客服</el-dropdown-item>
-             <el-dropdown-item icon="el-icon-error">推出登录</el-dropdown-item>
+             <el-dropdown-item  ><div @click="exit"> <i class="el-icon-error"></i> 退出登录</div></el-dropdown-item>
 
            </el-dropdown-menu>
          </el-dropdown>
 
 
          <el-dialog
+             v-if="!this.$store.state.isLogin"
              title="扫码登陆"
              :visible.sync="centerDialogVisible"
              draggable="true"
@@ -112,14 +116,31 @@ export default {
       this.$store.state.userData=(await this.$store.dispatch("getLoginStatus",localStorage.getItem("cookie"))).data.data
       if(this.$store.state.userData.profile!=null||undefined){
         this.$store.state.isLogin=true
-      }
 
+      }
      if(this.$store.state.isLogin===true){
         this.avater=this.$store.state.userData.profile["avatarUrl"]
         console.log(this.avater)
       }
       // await this.$store.dispatch("getUserDetail")
+
+
+
       },
+    exit(){
+
+      this.$axios({
+        url:'/logout',
+        method:"post"
+      })
+      location.hash=""
+      setTimeout(()=>{
+        location.reload()
+      },2000)
+    },
+
+
+
 
 
 
@@ -134,8 +155,11 @@ export default {
   mounted() {
     this.isLogin()
 
+        }
 
-  }
+
+
+
 }
 </script>
 

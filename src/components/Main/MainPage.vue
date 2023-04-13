@@ -21,7 +21,7 @@ export default {
   components: {Customize,NewMusic,PlayList},
   data(){
     return {
-      activeName: 'second'
+      activeName: 'second',
     }
   },
   methods: {
@@ -30,8 +30,11 @@ export default {
   },
   mounted() {
     this.handleClick()
+  },
+  watch:{
 
-  }
+   }
+
 }
 </script>
 

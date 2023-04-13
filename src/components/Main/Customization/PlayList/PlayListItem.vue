@@ -3,7 +3,11 @@
   <el-card :body-style="{ padding: '0px' }" shadow="never">
     <router-link :to="{path:'/Detail',query:{id:this.id}} ">
 
-      <el-image :src="src+'?param=200y200'" class="image" :title="details"  :lazy="lazy" ></el-image>
+      <el-image :src="src+'?param=200y200'" class="image" :title="details"  :lazy="lazy" >
+        <div slot="placeholder" class="image-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div>
+      </el-image>
 
       <div class="bottom">
         <div class="bottom clearfix">

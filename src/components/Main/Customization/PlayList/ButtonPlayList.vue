@@ -4,7 +4,7 @@
           type="flex"
           justify="center"
           style="margin: 0px -90px"
-          v-for="(i,index) in this.$store.state.highPlayList[this.$store.state.category]"
+          v-for="(i,index) in this.$store.state.highPlayList"
   >
     <el-col v-for="j in i" :span="4"  :key="i.id"><PlayListItem :src="j.coverImgUrl" :details="j.name" :id="j.id"  :playCount="j['playCount']" ></PlayListItem></el-col>
   </el-row>

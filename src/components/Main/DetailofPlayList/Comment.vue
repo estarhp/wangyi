@@ -1,5 +1,5 @@
 <template>
-<div style="background-color: white">
+<div style="background-color: white" v-if="AllComment">
   <el-input
       type="textarea"
       :rows="2"

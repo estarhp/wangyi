@@ -5,21 +5,21 @@
         <el-tab-pane label="我创建的歌单" name="first">
           <el-row :gutter="25"
                   type="flex"
-                  justify="center"
-                  style="margin: 0px -90px"
+                  justify="left"
+                  style="margin: 0px"
                   v-for="(i,index) in MyCreateList"
           >
-            <el-col v-for="j in i" :span="4"  :key="i.id"><PlayListItem :src="j.coverImgUrl" :details="j.name" :id="j.id"  :playCount="j['playCount']" ></PlayListItem></el-col>
+            <el-col v-for="j in i" :span="5"  :key="i.id"><PlayListItem :src="j.coverImgUrl" :details="j.name" :id="j.id"  :playCount="j['playCount']" ></PlayListItem></el-col>
           </el-row>
         </el-tab-pane>
         <el-tab-pane label="收藏的歌单" name="second">
           <el-row :gutter="25"
                   type="flex"
-                  justify="center"
-                  style="margin: 0px -90px"
+                  justify="left"
+                  style="margin: 0px"
                   v-for="(i,index) in MyLoveList"
           >
-            <el-col v-for="j in i" :span="4"  :key="i.id"><PlayListItem :src="j.coverImgUrl" :details="j.name" :id="j.id"  :playCount="j['playCount']" :lazy="false" ></PlayListItem></el-col>
+            <el-col v-for="j in i" :span='5'  :key="i.id"><PlayListItem :src="j.coverImgUrl" :details="j.name" :id="j.id"  :playCount="j['playCount']" :lazy="false" ></PlayListItem></el-col>
           </el-row>
         </el-tab-pane>
         <el-tab-pane label="创建建的音乐栏" name="third">我没做，hhhh</el-tab-pane>

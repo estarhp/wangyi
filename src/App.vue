@@ -42,6 +42,9 @@ export default {
   beforeCreate() {
     this.$store.dispatch("getPlaylistTag")
     // this.$store.dispatch("getLoginStatus")
+  },
+  mounted() {
+
   }
 }
 </script>

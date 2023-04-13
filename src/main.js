@@ -28,7 +28,7 @@ import {
   CarouselItem,
   Card,
   Badge,
-  RadioGroup, RadioButton, Loading, InfiniteScroll, CollapseItem, Collapse, DatePicker, Radio, Upload
+  RadioGroup, RadioButton, Loading, InfiniteScroll, CollapseItem, Collapse, DatePicker, Radio, Upload, Table
 } from 'element-ui';
 
 
@@ -74,6 +74,8 @@ Vue.use(Collapse)
 Vue.use(DatePicker)
 Vue.use(Radio)
 Vue.use(Upload)
+
+
 
 
 Vue.prototype.$axios = axios

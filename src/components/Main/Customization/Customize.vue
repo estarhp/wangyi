@@ -2,17 +2,18 @@
   <div style="overflow:auto;height: 66vh">
     <el-carousel :interval="4000" type="card" height="200px">
       <el-carousel-item v-for="item in urlList" :key="item.bannerId">
-        <el-image :src="item.pic" fit="scale-down" ></el-image>
+        <el-image :src="item.pic" fit="scale-down" >
+          <div slot="placeholder" class="image-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div></el-image>
       </el-carousel-item>
     </el-carousel>
-    <el-row :gutter="25"  type="flex" justify="center" style="margin-left: -70px;margin-right: -70px;">
-      <el-col :span="4"  v-for="(i,index) in creativesPlayList.slice(0,5)" :key="i.id"><PlayListItem :src="i.picUrl" :details="i.name" :id="i.id" :playCount="i['playcount']" v-if="index<5"></PlayListItem></el-col>
+    <el-row :gutter="25"  type="flex" justify="left" >
+      <el-col :span="5"  v-for="(i,index) in creativesPlayList.slice(0,5)" :key="i.id"><PlayListItem :src="i.picUrl" :details="i.name" :id="i.id" :playCount="i['playcount']" v-if="index<5"></PlayListItem></el-col>
     </el-row>
-    <el-row :gutter="25"  type="flex" justify="center" style="margin-left: -70px;margin-right: -70px;">
-      <el-col :span="4"  v-for="(i,index) in creativesPlayList.slice(5,10)" :key="i.id"><PlayListItem :src="i.picUrl" :details="i.name" :id="i.id"  :playCount="i['playcount']" v-if="index<5"></PlayListItem></el-col>
+    <el-row :gutter="25"  type="flex" justify="left" >
+      <el-col :span="5"  v-for="(i,index) in creativesPlayList.slice(5,10)" :key="i.id"><PlayListItem :src="i.picUrl" :details="i.name" :id="i.id"  :playCount="i['playcount']" v-if="index<5"></PlayListItem></el-col>
     </el-row>
-
-
 
   </div>
 </template>
@@ -45,6 +46,7 @@ export default {
         method: 'get'
       })
       this.creativesPlayList=res.data["recommend"]
+
     }
     },
     mounted() {

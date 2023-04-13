@@ -5,7 +5,7 @@
         <el-col :span="2" >
           <div class="grid-content bg-purple">
             <el-image :src="data[index]['album']['picUrl']+'?param=200y200'" fit="contain" lazy style="height: 100%;width: 100%">
-              <div slot="error" class="image-slot">
+              <div slot="placeholder" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>

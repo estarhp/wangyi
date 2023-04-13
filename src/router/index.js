@@ -9,31 +9,39 @@ import EditMyDetail from "@/components/Top/MyDetail/EditMyDetail";
 
 
 export default new VueRouter({
-    routes:[{
+    mode:"hash",
+    routes:[
+        {path:"",
+        redirect:"/MainPage"
+        },
+        {
         path:"/MainPage",
         component:MainPage,
-        children:[{
+        children:[
+
+
+        {
+            path:"NewUp",
+            component:NewUp
+        },
+        {
             path:"NewPush",
             component:NewPush
-        },
-            {
-                path:"NewUp",
-                component:NewUp
-            },
+        }
         ]
     },
     {
         path:"/Detail",
         component:PlayListDetail
     },
-        {
-            path:"/MyDetail",
-            component:MyDetail
-        },
-        {
-            path:"/Edit",
-            component:EditMyDetail
-        }
+    {
+        path:"/MyDetail",
+        component:MyDetail
+    },
+    {
+        path:"/Edit",
+        component:EditMyDetail
+    }
 
 
     ]
