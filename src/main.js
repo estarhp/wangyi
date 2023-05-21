@@ -28,7 +28,7 @@ import {
   CarouselItem,
   Card,
   Badge,
-  RadioGroup, RadioButton, Loading, InfiniteScroll, CollapseItem, Collapse, DatePicker, Radio, Upload, Table
+  RadioGroup, RadioButton, Loading, InfiniteScroll, CollapseItem, Collapse, DatePicker, Radio, Upload
 } from 'element-ui';
 
 
