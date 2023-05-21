@@ -25,6 +25,8 @@ import Navigation from "@/components/Top/Navigation";
 import Myaside from "@/components/Main/Myaside";
 import MainPage from "@/components/Main/MainPage";
 
+
+
 export default {
   name: 'App',
   components:{Navigation,Myaside,MainPage},
